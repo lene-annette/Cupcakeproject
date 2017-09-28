@@ -9,6 +9,7 @@ import datasource.CupcakeMapper;
 import entities.User;
 import entities.Bottom;
 import datasource.UserDBMapper;
+import entities.Top;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,23 +54,24 @@ public class LogicFacade {
 
         return bottoms;
     }
+    
+    public static List<Top> getTops(){
+        List<Top> tops = new ArrayList<>();
+        try{
+            tops = CupcakeMapper.getAllTops();
+        }catch (Exception e){
+            tops = null;
+        }
+        return tops;
+    }
 
-    public static boolean login(String name, String password) throws SQLException, ClassNotFoundException {
+    public static boolean login(String name, String password) {
         User user = new User("Lene","1234",100,"lene@mail.dk");
         if(name.equals(user.getName()) && password.equals(user.getPassword())){
             return true;
         }else{
             return false;
         }
-
-        
-//        User user = UserDBMapper.getUser(name, password);
-//        if (user != null) {
-//            return true;
-//        } else {
-//
-//            return false;
-//        }
     }
 
 }

@@ -7,6 +7,7 @@ package Servlets;
 
 import cupcakeproject.LogicFacade;
 import entities.Bottom;
+import entities.Top;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -37,13 +38,17 @@ public class ShowProductsServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             response.setContentType("text/html;charset=UTF-8");
-            List<Bottom> bottoms = LogicFacade.getBottoms();
-            //request.setAttribute("bottomList", bottoms);
+            List<Bottom> bottoms;
+            bottoms = LogicFacade.getBottoms();
+            List<Top> tops;
+            tops = LogicFacade.getTops();
+            
             
             HttpSession session = request.getSession();
             session.setAttribute("bottomList", bottoms);
+            session.setAttribute("topList",tops);
             
-            String nextURL = "products.jsp";
+            String nextURL = "/products.jsp";
             request.getRequestDispatcher(nextURL).forward(request,response);
             
         }catch(Exception e){

@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class CupcakeMapper {
     
-    public static List<Bottom> getAllBottoms() throws SQLException, ClassNotFoundException{
+    public static List<Bottom> getAllBottoms() {
         List<Bottom> bottoms = new ArrayList<>();
         try{
             String SQL = "SELECT * FROM bottom;";
@@ -41,7 +41,7 @@ public class CupcakeMapper {
         return bottoms;
     }
     
-        public static List<Top> getAllTops() throws SQLException, ClassNotFoundException{
+        public static List<Top> getAllTops() {
         List<Top> tops = new ArrayList<>();
         try{
             String SQL = "SELECT * FROM top;";

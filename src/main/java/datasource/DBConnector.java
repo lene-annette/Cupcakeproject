@@ -23,6 +23,7 @@ public class DBConnector {
     private static String password = "LeneSkov";
 
     public static Connection connection() throws ClassNotFoundException, SQLException {
+        
         Class.forName("com.mysql.jdbc.Driver");
         Connection connection = DriverManager.getConnection(url, username, password);
         return connection;
