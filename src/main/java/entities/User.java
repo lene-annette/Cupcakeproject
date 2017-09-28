@@ -57,6 +57,13 @@ public class User {
     public void setBalance(int balance) {
         this.balance = balance;
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "name=" + name + ", password=" + password + ", balance=" + balance + ", email=" + email + '}';
+    }
+    
+    
     
     
     

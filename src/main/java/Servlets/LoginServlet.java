@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,23 +35,24 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try {
-           String name = request.getParameter("name");
-           String password = request.getParameter("password");
-           
-           boolean succes = LogicFacade.login(name, password);
-           
-           if(succes){
-               RequestDispatcher rd = request.getRequestDispatcher("/loggedIn.jsp");
-               request.setAttribute("name", name);
-               rd.forward(request, response);
-           }else{
-               request.getRequestDispatcher("error.html").forward(request,response);
-           }
-           
-        }catch(Exception e){
-            request.getRequestDispatcher("error.html").forward(request,response);
+            response.setContentType("text/html;charset=UTF-8");
+            String name = request.getParameter("uname");
+            String password = request.getParameter("password");
+
+            boolean succes = LogicFacade.login(name, password);
+
+            if (succes) {
+                HttpSession session = request.getSession();
+                session.setAttribute("name",name);
+                String nextURL = "loggedIn.jsp";
+                request.getRequestDispatcher(nextURL).forward(request, response);
+            } else {
+                request.getRequestDispatcher("loginError.html").forward(request, response);
+            }
+
+        } catch (Exception e) {
+            request.getRequestDispatcher("error.html").forward(request, response);
         }
     }
 

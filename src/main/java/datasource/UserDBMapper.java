@@ -78,7 +78,7 @@ public class UserDBMapper {
         Connection con = null;
         String SQL = "SELECT * FROM users WHERE u_name='"+ name +"' AND psw='"+ password +"';";
         ResultSet rs = null;
-        User user = null;
+        User user = new User();
         try{
             con = DBConnector.connection();
             rs = con.createStatement().executeQuery(SQL);

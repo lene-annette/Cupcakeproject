@@ -14,10 +14,12 @@
     <body>
         <h2>Please enter data:</h2>
         <form action="LoginServlet">
-            <input type="text" name="uname" ><br>
-            <input type="text" name="password" ><br>
+            user name <br>
+            <input type="text" name="uname" id="uname"><br>
+            password <br>
+            <input type="password" name="password" id="password"><br>
             
-            <input type="submit" name="login" value="Login">   
+            <input type="submit" value="Login">   
         </form>
     </body>
 </html>
