@@ -14,6 +14,7 @@
     </head>
     <body>
         <% List<Bottom> bottoms = (List<Bottom>) session.getAttribute("bottomList");%>
+        <form>
         <h2>Bottoms:</h2><br>
         <select name="bChooser">
             <%for(Bottom bottom : bottoms){%>
@@ -48,7 +49,7 @@
             <option value="10">10</option>
         </select>
         
-        
+        </form>
         
      
     </body>

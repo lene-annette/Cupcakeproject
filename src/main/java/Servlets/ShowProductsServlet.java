@@ -52,7 +52,9 @@ public class ShowProductsServlet extends HttpServlet {
             request.getRequestDispatcher(nextURL).forward(request,response);
             
         }catch(Exception e){
-            request.getRequestDispatcher("error.html").forward(request,response);
+            String er = e.getMessage();
+            request.setAttribute("error", er);
+            request.getRequestDispatcher("errrorjsp.jsp").forward(request,response);
         }
     }
 

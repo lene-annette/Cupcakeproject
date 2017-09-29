@@ -65,7 +65,7 @@ public class LogicFacade {
         return tops;
     }
 
-    public static boolean login(String name, String password) {
+    public static boolean login(String name, String password) { //TODO: skal returnere User
         User user = new User("Lene","1234",100,"lene@mail.dk");
         if(name.equals(user.getName()) && password.equals(user.getPassword())){
             return true;

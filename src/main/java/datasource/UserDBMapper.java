@@ -57,7 +57,7 @@ public class UserDBMapper {
             ps.setString(1, uname);
             ps.setString(2, psw);
             rs = ps.executeQuery(SQL);
-            while (rs.next()) {
+            if (rs.next()) {
                 user.setName(rs.getString("u_name"));
                 user.setPassword(rs.getString("psw"));
                 user.setBalance(rs.getInt("balance"));
