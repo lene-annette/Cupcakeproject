@@ -6,6 +6,7 @@
 package Servlets;
 
 import cupcakeproject.LogicFacade;
+import cupcakeproject.ShoppingCart;
 import entities.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,6 +40,10 @@ public class UserServlet extends HttpServlet {
             response.setContentType("text/html;charset=UTF-8");
 
             String action = request.getParameter("action");
+            
+            HttpSession session = request.getSession();
+            ShoppingCart sc = new ShoppingCart();
+            session.setAttribute("cart", sc);
 
             if (action.equals("login")) {
                 String name = request.getParameter("name");
@@ -47,7 +52,6 @@ public class UserServlet extends HttpServlet {
                 User user = LogicFacade.login(name, password);
 
                 if (user != null) {
-                    HttpSession session = request.getSession();
                     session.setAttribute("activeUser", user);
                     String nextURL = "ShowProductsServlet";
                     request.getRequestDispatcher(nextURL).forward(request, response);
@@ -62,14 +66,13 @@ public class UserServlet extends HttpServlet {
                 int balance = Integer.parseInt(sbalance);
                 User user = LogicFacade.createUser(name, psw, balance, email);
 
-                HttpSession session = request.getSession();
-                session.setAttribute("activeUser",user);
+                session.setAttribute("activeUser", user);
                 String nextURL = "ShowProductsServlet";
                 request.getRequestDispatcher(nextURL).forward(request, response);
             }
 
         } catch (Exception e) {
-            response.sendRedirect("error.html");
+            response.sendRedirect("errorjsp.jsp");
         }
     }
 

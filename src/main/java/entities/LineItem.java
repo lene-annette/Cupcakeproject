@@ -18,10 +18,10 @@ public class LineItem {
     private int invoice_id;
     private int totalPrice;
 
-    public LineItem(Cupcake cupcake, int quantity, int invoice_id) {
+    public LineItem(Cupcake cupcake, int quantity) {
         this.cupcake = cupcake;
         this.quantity = quantity;
-        this.invoice_id = invoice_id;
+       // this.invoice_id = invoice_id;
         this.totalPrice = this.cupcake.getPrice() * this.quantity;
     }
 
