@@ -54,7 +54,7 @@ public class ShowProductsServlet extends HttpServlet {
         }catch(Exception e){
             String er = e.getMessage();
             request.setAttribute("error", er);
-            request.getRequestDispatcher("errrorjsp.jsp").forward(request,response);
+            request.getRequestDispatcher("errorjsp.jsp").forward(request,response);
         }
     }
 

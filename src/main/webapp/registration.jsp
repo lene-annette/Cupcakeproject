@@ -15,7 +15,7 @@
         <form name="registerForm" method="post" action="UserServlet">
             Navn: <input type="text" name="name"><br>
             Password: <input type="password" name="password"><br>
-            Email: <input type="text" name="email"><br>
+            Email: <input type="email" name="email"><br>
             Balance: <input type="text" name="balance"><br>
             <input type="submit" name="register" value="register">
             

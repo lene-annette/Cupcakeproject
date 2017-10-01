@@ -12,10 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-            <div>an error ucurred please try again <br>
+            <div>an error ucurred please try again,  
+                this is the jsp<br>
             <a href="index.html">home</a></div>
         <hr>
         <%=request.getAttribute("error")%>
-        øv
+        
     </body>
 </html>

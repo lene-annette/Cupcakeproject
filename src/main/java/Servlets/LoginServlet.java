@@ -40,9 +40,9 @@ public class LoginServlet extends HttpServlet {
             String name = request.getParameter("uname");
             String password = request.getParameter("password");
 
-            boolean succes = LogicFacade.login(name, password);
+            User succes = LogicFacade.login(name, password);
 
-            if (succes) {
+            if (succes != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("name",name);
                 String nextURL = "loggedIn.jsp";

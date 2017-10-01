@@ -20,14 +20,27 @@ import java.util.List;
  */
 public class LogicFacade {
 
-    public static void createUser1(String name, String password, int balance, String email) {
+    public static User createUser1(String name, String password, int balance, String email) {
         User user = new User(name, password, balance, email);
+        return user;
     }
 
-    public static User createUser(String name, String password, int balance, String email) throws SQLException, ClassNotFoundException {
-        User user = new User(name, password, balance, email);
-        UserDBMapper.createUser(user);
-        return UserDBMapper.getUser(name, password);
+    public static User createUser(String name, String password, int balance, String email){// throws SQLException, ClassNotFoundException {
+        return UserDBMapper.createUser(name, password, balance, email);
+    }
+
+    public static User login1(String name, String password) { //TODO: skal kontakte databasen
+        User user = new User("Lene", "1234", 100, "lene@mail.dk");
+        if (name.equals(user.getName()) && password.equals(user.getPassword())) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+    public static User login(String name, String password) {
+        User user = UserDBMapper.getUser(name, password);
+        return user;
     }
 
     public static List<Bottom> getBottoms1() {
@@ -54,24 +67,15 @@ public class LogicFacade {
 
         return bottoms;
     }
-    
-    public static List<Top> getTops(){
+
+    public static List<Top> getTops() {
         List<Top> tops = new ArrayList<>();
-        try{
+        try {
             tops = CupcakeMapper.getAllTops();
-        }catch (Exception e){
+        } catch (Exception e) {
             tops = null;
         }
         return tops;
-    }
-
-    public static boolean login(String name, String password) { //TODO: skal returnere User
-        User user = new User("Lene","1234",100,"lene@mail.dk");
-        if(name.equals(user.getName()) && password.equals(user.getPassword())){
-            return true;
-        }else{
-            return false;
-        }
     }
 
 }

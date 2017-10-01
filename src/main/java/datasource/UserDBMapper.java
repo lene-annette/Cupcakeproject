@@ -43,14 +43,15 @@ public class UserDBMapper {
         return users;
     }
 
-    public static User getUser1(String uname, String psw) throws SQLException, ClassNotFoundException {
+    public static User getUser(String uname, String psw) { //throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         String SQL = "SELECT * FROM users WHERE u_name= '?' and psw= '?';";
-        User user = new User();
+        User user = null;
 
         try {
+            user = new User();
             con = DBConnector.connection();
             ps = con.prepareStatement(SQL);
 
@@ -63,26 +64,27 @@ public class UserDBMapper {
                 user.setBalance(rs.getInt("balance"));
                 user.setEmail(rs.getString("email"));
             }
-        } finally {
             if (rs != null) {
                 rs.close();
             }
             ps.close();
             con.close();
+        } catch (Exception ex) {
+            Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return user;
 
     }
-    
-    public static User getUser(String name, String password)throws SQLException, ClassNotFoundException{
+
+    public static User getUser1(String name, String password) throws SQLException, ClassNotFoundException {
         Connection con = null;
-        String SQL = "SELECT * FROM users WHERE u_name='"+ name +"' AND psw='"+ password +"';";
+        String SQL = "SELECT * FROM users WHERE u_name='" + name + "' AND psw='" + password + "';";
         ResultSet rs = null;
         User user = new User();
-        try{
+        try {
             con = DBConnector.connection();
             rs = con.createStatement().executeQuery(SQL);
-            while(rs.next()){
+            while (rs.next()) {
                 user.setName(rs.getString("u_name"));
                 user.setPassword(rs.getString("psw"));
                 user.setBalance(rs.getInt("balance"));
@@ -90,28 +92,35 @@ public class UserDBMapper {
             }
             rs.close();
             con.close();
-        }catch(Exception ex){
-            Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return user;       
-        
-    }
-
-    public static void createUser(User user) throws SQLException, ClassNotFoundException {
-        try {
-            String SQL = "insert into users values('?','?',?,'?');";
-            Connection con = DBConnector.connection();
-            PreparedStatement ps = con.prepareStatement(SQL);
-            
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPassword());
-            ps.setInt(3, user.getBalance());
-            ps.setString(4, user.getEmail());
-            
-            ps.executeUpdate(SQL);
         } catch (Exception ex) {
             Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return user;
+
+    }
+
+    public static User createUser(String name, String password, int balance, String email){// throws SQLException, ClassNotFoundException {
+            Connection con = null;
+            PreparedStatement ps = null;
+            String SQL = "INSERT INTO users VALUES('?','?','?','?');";
+        try {
+            con = DBConnector.connection();
+            ps = con.prepareStatement(SQL);
+
+            ps.setString(1, name);
+            ps.setString(2, password);
+            ps.setInt(3, balance);
+            ps.setString(4, email);
+
+            ps.executeUpdate(SQL);
+            
+            ps.close();
+            con.close();
+        } catch (Exception ex) {
+            Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return getUser(name, password);
 
     }
 

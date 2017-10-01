@@ -35,34 +35,42 @@ public class UserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try {
-            String name = request.getParameter("name");
-            String psw = request.getParameter("password");
-            String email = request.getParameter("email");
-            String sbalance = request.getParameter("balance");
-            
-            int balance = Integer.parseInt(sbalance);
-            
-            User user = LogicFacade.createUser(name, psw, balance, email);
-            String uname = user.getName();
-            
-            //HttpSession session = request.getSession();
-            RequestDispatcher rd = request.getRequestDispatcher("/userCreated.jsp");
-            request.setAttribute("name",uname);
-            rd.forward(request,response);
-            
-            
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet UserServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Hi  " + name + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-        }catch(Exception e){
+            response.setContentType("text/html;charset=UTF-8");
+
+            String action = request.getParameter("action");
+
+            if (action.equals("login")) {
+                String name = request.getParameter("name");
+                String password = request.getParameter("password");
+
+                User user = LogicFacade.login(name, password);
+
+                if (user != null) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("activeUser", user);
+                    String nextURL = "ShowProductsServlet";
+                    request.getRequestDispatcher(nextURL).forward(request, response);
+                } else {
+                    request.getRequestDispatcher("loginError.html").forward(request, response);
+                }
+            } else if (action.equals("register")) {
+                String name = request.getParameter("name");
+                String psw = request.getParameter("password");
+                String email = request.getParameter("email");
+                String sbalance = request.getParameter("balance");
+                int balance = Integer.parseInt(sbalance);
+                User user = LogicFacade.createUser(name, psw, balance, email);
+
+                String uname = user.getName();
+
+                HttpSession session = request.getSession();
+                session.setAttribute("name", uname);
+                String nextURL = "userCreated.jsp";
+                request.getRequestDispatcher(nextURL).forward(request, response);
+            }
+
+        } catch (Exception e) {
             response.sendRedirect("error.html");
         }
     }

@@ -19,16 +19,16 @@ import java.util.logging.Logger;
 public class CupcakeMain {
     
     public static void main(String[] args) {
-        UserDBMapper um = new UserDBMapper();
-        try {
-            User user = um.getUser("Lene", "1234");
-            System.out.println(user);
-        
-        } catch (SQLException ex) {
-            Logger.getLogger(CupcakeMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CupcakeMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        UserDBMapper um = new UserDBMapper();
+//        try {
+//            User user = um.getUser("Lene", "1234");
+//            System.out.println(user);
+//        
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CupcakeMain.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (ClassNotFoundException ex) {
+//            Logger.getLogger(CupcakeMain.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
     
 }
