@@ -62,11 +62,9 @@ public class UserServlet extends HttpServlet {
                 int balance = Integer.parseInt(sbalance);
                 User user = LogicFacade.createUser(name, psw, balance, email);
 
-                String uname = user.getName();
-
                 HttpSession session = request.getSession();
-                session.setAttribute("name", uname);
-                String nextURL = "userCreated.jsp";
+                session.setAttribute("activeUser",user);
+                String nextURL = "ShowProductsServlet";
                 request.getRequestDispatcher(nextURL).forward(request, response);
             }
 

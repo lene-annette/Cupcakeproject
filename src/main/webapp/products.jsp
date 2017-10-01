@@ -21,7 +21,7 @@
         <div>
             <% List<Bottom> bottoms = (List<Bottom>) session.getAttribute("bottomList");%>
             <form>
-                Bottoms:<br>
+                <br>Bottoms:<br>
                 <select name="bChooser">
                     <%for (Bottom bottom : bottoms) {%>
                     <% String type = bottom.getType();%>
@@ -39,7 +39,7 @@
                     <% int price = top.getPrice();%>
                     <option><%out.print(type + "\t" + price);%></option>
                     <% }%>
-                </select><br>
+                </select><br><br>
 
                 Quantity: <br>
                 <select name="quantity">
@@ -53,7 +53,7 @@
                     <option value="8">8</option>
                     <option value="9">9</option>
                     <option value="10">10</option>
-                </select>
+                </select><br>
                 <br>
                 <input type="submit" value="Add to cart">
             </form>

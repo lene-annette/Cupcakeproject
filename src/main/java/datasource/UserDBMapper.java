@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class UserDBMapper {
 
-    public static List<User> getAllUsers() throws SQLException, ClassNotFoundException {
+    public static List<User> getAllUsers(){ //throws SQLException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
         try {
             String SQL = "SELECT * FROM users;";
@@ -43,7 +43,7 @@ public class UserDBMapper {
         return users;
     }
 
-    public static User getUser(String uname, String psw) { //throws SQLException, ClassNotFoundException {
+    public static User getUser1(String uname, String psw) { //throws SQLException, ClassNotFoundException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -76,7 +76,7 @@ public class UserDBMapper {
 
     }
 
-    public static User getUser1(String name, String password) throws SQLException, ClassNotFoundException {
+    public static User getUser(String name, String password){// throws SQLException, ClassNotFoundException {
         Connection con = null;
         String SQL = "SELECT * FROM users WHERE u_name='" + name + "' AND psw='" + password + "';";
         ResultSet rs = null;
@@ -84,7 +84,7 @@ public class UserDBMapper {
         try {
             con = DBConnector.connection();
             rs = con.createStatement().executeQuery(SQL);
-            while (rs.next()) {
+            if (rs.next()) {
                 user.setName(rs.getString("u_name"));
                 user.setPassword(rs.getString("psw"));
                 user.setBalance(rs.getInt("balance"));
@@ -99,7 +99,7 @@ public class UserDBMapper {
 
     }
 
-    public static User createUser(String name, String password, int balance, String email){// throws SQLException, ClassNotFoundException {
+    public static User createUser1(String name, String password, int balance, String email){// throws SQLException, ClassNotFoundException {
             Connection con = null;
             PreparedStatement ps = null;
             String SQL = "INSERT INTO users VALUES('?','?','?','?');";
@@ -122,6 +122,21 @@ public class UserDBMapper {
         
         return getUser(name, password);
 
+    }
+    
+    public static User createUser(String name, String password, int balance, String email){
+        Connection con = null;
+        String sql = "INSERT INTO users VALUES('"+ name +"','"+ password +"',"+ balance +",'"+ email +"');";
+        try{
+            con = DBConnector.connection();
+            con.createStatement().executeUpdate(sql);
+            
+            con.close();
+        } catch(Exception ex){
+           Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex); 
+        }
+        
+        return getUser(name,password);
     }
 
 }
