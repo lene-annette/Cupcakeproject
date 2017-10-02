@@ -5,39 +5,46 @@
  */
 package entities;
 
-import entities.Cupcake;
-
 /**
  *
  * @author lene_
  */
 public class LineItem {
     
-    private Cupcake cupcake;
+    private Bottom bot;
+    private Top top;
     private int quantity;
-    private int invoice_id;
     private int totalPrice;
 
-    public LineItem(Cupcake cupcake, int quantity) {
-        this.cupcake = cupcake;
+    public LineItem(Bottom bot, Top top, int quantity) {
+        this.bot = bot;
+        this.top = top;
         this.quantity = quantity;
        // this.invoice_id = invoice_id;
-        this.totalPrice = this.cupcake.getPrice() * this.quantity;
+        this.totalPrice = (this.bot.getPrice() + this.top.getPrice()) * this.quantity;
     }
 
     public LineItem() {
-        cupcake = null;
+        bot = null;
+        top = null;
         quantity = 0;
-        invoice_id = 0;
         totalPrice = 0;
     }
 
-    public Cupcake getCupcake() {
-        return cupcake;
+    public Bottom getBot() {
+        return bot;
     }
 
-    public void setCupcake(Cupcake cupcake) {
-        this.cupcake = cupcake;
+    public void setBot(Bottom bot) {
+        this.bot = bot;
+    }
+
+    public Top getTop() {
+        return top;
+    }
+
+    public void setTop(Top top) {
+        this.top = top;
     }
 
     public int getQuantity() {
@@ -48,17 +55,9 @@ public class LineItem {
         this.quantity = quantity;
     }
 
-    public int getInvoice_id() {
-        return invoice_id;
-    }
-
-    public void setInvoice_id(int invoice_id) {
-        this.invoice_id = invoice_id;
-    }
-
     public int getTotalPrice() {
-        if(totalPrice == 0 && quantity != 0 && cupcake != null){
-            totalPrice = cupcake.getPrice() * quantity;
+        if(totalPrice == 0 && quantity != 0 && bot != null && top != null){
+            totalPrice = (bot.getPrice() + top.getPrice()) * quantity;
         }
         return totalPrice;
     }

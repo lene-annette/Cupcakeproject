@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.util.List, entities.Bottom, entities.Top, entities.User" %>
+<%@page import="java.util.List, entities.Bottom, entities.Top, entities.User, entities.LineItem, cupcakeproject.ShoppingCart" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,7 +20,7 @@
         </div>
         <div>
             <% List<Bottom> bottoms = (List<Bottom>) session.getAttribute("bottomList");%>
-            <form>
+            <form action="CartServlet">
                 <br>Bottoms:<br>
                 <select name="bChooser">
                     <%for (Bottom bottom : bottoms) {%>
@@ -58,6 +58,29 @@
                 <input type="submit" value="Add to cart">
             </form>
         </div>
+        <div>
+            <table>
+                <tr>
+                    <th>Bottom</th>
+                    <th>Topping</th> 
+                    <th>Quantity</th>
+                    <th>Total price</th>
+                </tr>
+                <% ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");%>
+                <% List<LineItem> lineItem = shoppingCart.getListOfItems();%>
 
+                <%for (LineItem item : lineItem) {%>
+                <tr><td>
+                        <% String bottom = item.getBot().getType(); %>
+                    </td><td>
+                        <% String top = item.getTop().getType(); %> 
+                    </td><td>
+                        <% int quantity = item.getQuantity(); %>
+                    </td><td>
+                        <% int totalPrice = item.getTotalPrice();%>      
+                    </td></tr>
+                <% } %>
+            </table>
+        </div>
     </body>
 </html>
