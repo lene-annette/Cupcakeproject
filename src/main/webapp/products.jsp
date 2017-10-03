@@ -26,7 +26,7 @@
                     <%for (Bottom bottom : bottoms) {%>
                     <% String type = bottom.getType();%>
                     <% int price = bottom.getPrice();%>
-                    <option><%out.print(type + "\t" + price);%></option>
+                    <option><%out.print(type + " " + price);%></option>
                     <% } %>
                 </select><br>
                 <br>
@@ -37,7 +37,7 @@
                     <%for (Top top : tops) {%>
                     <% String type = top.getType();%>
                     <% int price = top.getPrice();%>
-                    <option><%out.print(type + "\t" + price);%></option>
+                    <option><%out.print(type + " " + price);%></option>
                     <% }%>
                 </select><br><br>
 
@@ -58,7 +58,12 @@
                 <input type="submit" value="Add to cart">
             </form>
         </div>
+
+
         <div>
+            <% ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");%>
+            <% List<LineItem> lineItem = shoppingCart.getListOfItems();%>
+            <%if (!lineItem.isEmpty()) {%>
             <table>
                 <tr>
                     <th>Bottom</th>
@@ -66,21 +71,26 @@
                     <th>Quantity</th>
                     <th>Total price</th>
                 </tr>
-                <% ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");%>
-                <% List<LineItem> lineItem = shoppingCart.getListOfItems();%>
 
                 <%for (LineItem item : lineItem) {%>
                 <tr><td>
-                        <% String bottom = item.getBot().getType(); %>
+                        <% String bottom = item.getBot().getType();%>
+                        <%=bottom%>
                     </td><td>
-                        <% String top = item.getTop().getType(); %> 
+                        <% String top = item.getTop().getType();%> 
+                        <%=top%>
                     </td><td>
-                        <% int quantity = item.getQuantity(); %>
+                        <% int quantity = item.getQuantity();%>
+                        <%=quantity%>
                     </td><td>
                         <% int totalPrice = item.getTotalPrice();%>      
+                        <%=totalPrice%>
                     </td></tr>
-                <% } %>
+                    <% } %>
             </table>
+            <%}%>
         </div>
+
+
     </body>
 </html>

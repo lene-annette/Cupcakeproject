@@ -38,36 +38,34 @@ public class CartServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            
+
             HttpSession session = request.getSession();
-            ShoppingCart shoppingCart = (ShoppingCart)session.getAttribute("cart");
-            
+            ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute("cart");
+
             String bottom = request.getParameter("bChooser");
-            
             String topping = request.getParameter("tChooser");
-            
             String squantity = request.getParameter("quantity");
-            
+            int quantity = Integer.parseInt(squantity);
+            int bprice = 0;
+            int tprice = 0;
             String[] bottomCake = bottom.split(" ");
-            
-            int bprice = Integer.parseInt(bottomCake[1]);
+            bprice = Integer.parseInt(bottomCake[bottomCake.length-1]);
             
             Bottom bot = new Bottom(bottomCake[0],bprice);
             
             String[] topCake = topping.split(" ");
-            
-            int tprice = Integer.parseInt(topCake[1]);
+            tprice = Integer.parseInt(topCake[topCake.length-1]);
             
             Top top = new Top(topCake[0],tprice);
-            
-            int quantity = Integer.parseInt(squantity);
-            
+//            
             LineItem lineItem = new LineItem(bot, top, quantity);
-            
             shoppingCart.addItem(lineItem);
             
-            
-        } catch(Exception e) {
+
+            String nextURL = "ShowProductsServlet";
+            request.getRequestDispatcher(nextURL).forward(request, response);
+
+        } catch (Exception e) {
             response.sendRedirect("errorjsp.jsp");
         }
     }
