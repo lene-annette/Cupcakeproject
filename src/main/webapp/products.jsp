@@ -14,6 +14,7 @@
     </head>
     <body>
         <div>
+            
             <% User user1 = (User) session.getAttribute("activeUser");%>
             User: <%=user1.getName()%>
             Balance: <%=user1.getBalance()%>
@@ -87,8 +88,26 @@
                         <%=totalPrice%>
                     </td></tr>
                     <% } %>
+                <tr>
+                    <td>Shoppingcart total:</td>
+                    <td> </td>
+                    <td> </td>
+                    <td>
+                        <% int cartTotal = 0;%>
+                        <% for (LineItem item1 : lineItem) {%>
+                            <%cartTotal += item1.getTotalPrice();%>
+                        <% } %>
+                        <%=cartTotal%>
+                    </td>
+                    
+                </tr>
             </table>
-            <%}%>
+            <% } %>
+        </div>
+        <div>
+            <form action="#">
+                <input type="submit" value="Check out">
+            </form>
         </div>
 
 

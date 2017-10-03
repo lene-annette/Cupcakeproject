@@ -51,13 +51,23 @@ public class CartServlet extends HttpServlet {
             String[] bottomCake = bottom.split(" ");
             bprice = Integer.parseInt(bottomCake[bottomCake.length-1]);
             
-            Bottom bot = new Bottom(bottomCake[0],bprice);
+            String bStr = "";
+            for(int i = 0; i < bottomCake.length-1; i++){
+                bStr += bottomCake[i] + " ";
+            }
+                    
+            Bottom bot = new Bottom(bStr,bprice);
             
             String[] topCake = topping.split(" ");
             tprice = Integer.parseInt(topCake[topCake.length-1]);
             
-            Top top = new Top(topCake[0],tprice);
-//            
+            String tStr = "";
+            for(int i = 0; i < topCake.length-1; i++){
+                tStr += topCake[i] + " ";
+            }
+            
+            Top top = new Top(tStr,tprice);
+            
             LineItem lineItem = new LineItem(bot, top, quantity);
             shoppingCart.addItem(lineItem);
             
