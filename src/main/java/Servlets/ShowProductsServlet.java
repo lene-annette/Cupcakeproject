@@ -48,7 +48,7 @@ public class ShowProductsServlet extends HttpServlet {
             session.setAttribute("bottomList", bottoms);
             session.setAttribute("topList",tops);
             
-            String nextURL = "/products.jsp";
+            String nextURL = "products.jsp";
             request.getRequestDispatcher(nextURL).forward(request,response);
             
         }catch(Exception e){
