@@ -6,9 +6,11 @@
 package cupcakeproject;
 
 import datasource.CupcakeMapper;
+import datasource.InvoiceMapper;
 import entities.User;
 import entities.Bottom;
 import datasource.UserDBMapper;
+import entities.LineItem;
 import entities.Top;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -76,6 +78,13 @@ public class LogicFacade {
             tops = null;
         }
         return tops;
+    }
+    
+    public static void checkOut(ShoppingCart sc, User user, int spend){
+        List<LineItem> items = sc.getListOfItems();
+        int id = InvoiceMapper.registerOrder(user);
+        InvoiceMapper.registerDetails(id, items);
+        UserDBMapper.withDrawBalance(user, spend);
     }
 
 }

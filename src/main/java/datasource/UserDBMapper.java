@@ -138,5 +138,20 @@ public class UserDBMapper {
         
         return getUser(name,password);
     }
+    
+    public static void withDrawBalance(User user, int spend){
+        String name = user.getName();
+        int balance = user.getBalance() - spend;
+        Connection con = null;
+        String sql = "UPDATE users SET balance="+ balance +" WHERE u_name='"+ name +"';";
+        try{
+           con = DBConnector.connection();
+           con.createStatement().executeUpdate(sql);
+           
+           con.close();
+        }catch(Exception ex){
+            Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex); 
+        }
+    }
 
 }

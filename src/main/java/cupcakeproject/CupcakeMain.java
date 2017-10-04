@@ -5,12 +5,16 @@
  */
 package cupcakeproject;
 
-import datasource.UserDBMapper;
+import datasource.InvoiceMapper;
+import entities.Bottom;
+import entities.LineItem;
+import entities.Top;
 import entities.User;
-import java.sql.SQLException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -19,11 +23,21 @@ import java.util.logging.Logger;
 public class CupcakeMain {
     
     public static void main(String[] args) {
-            UserDBMapper um = new UserDBMapper();
-            User user = um.createUser("Adam", "password", 100, "adam@mail.dk");
-//            System.out.println(user);
-//              User user = um.getUser("Lene","1234");
-              System.out.println(user);
+         InvoiceMapper im = new InvoiceMapper();
+         
+         int id =1;
+         
+         List<LineItem> items = new ArrayList<>();
+         LineItem li1 = new LineItem(new Bottom("Chocolate",5), new Top("Blueberry",5), 2);
+         items.add(li1);
+         LineItem li2 = new LineItem(new Bottom("Vanilla",5),new Top("Strawberry",6),3);
+         items.add(li2);
+         
+         im.registerDetails(id, items);
+         
+        
+                 
+          
               
     }
     
