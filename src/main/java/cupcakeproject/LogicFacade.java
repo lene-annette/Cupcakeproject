@@ -6,7 +6,7 @@
 package cupcakeproject;
 
 import datasource.CupcakeMapper;
-import datasource.InvoiceMapper;
+//import datasource.InvoiceMapper;
 import entities.User;
 import entities.Bottom;
 import datasource.UserDBMapper;
@@ -80,11 +80,11 @@ public class LogicFacade {
         return tops;
     }
     
-    public static void checkOut(ShoppingCart sc, User user, int spend){
-        List<LineItem> items = sc.getListOfItems();
-        int id = InvoiceMapper.registerOrder(user);
-        InvoiceMapper.registerDetails(id, items);
-        UserDBMapper.withDrawBalance(user, spend);
-    }
+//    public static void checkOut(ShoppingCart sc, User user, int spend){
+//        List<LineItem> items = sc.getListOfItems();
+//        int id = InvoiceMapper.registerOrder(user);
+//        InvoiceMapper.registerDetails(id, items);
+//        UserDBMapper.withDrawBalance(user, spend);
+//    }
 
 }

@@ -5,7 +5,7 @@
  */
 package cupcakeproject;
 
-import datasource.InvoiceMapper;
+//import datasource.InvoiceMapper;
 import entities.Bottom;
 import entities.LineItem;
 import entities.Top;
@@ -23,17 +23,17 @@ import java.util.List;
 public class CupcakeMain {
     
     public static void main(String[] args) {
-         InvoiceMapper im = new InvoiceMapper();
-         
-         int id =1;
-         
-         List<LineItem> items = new ArrayList<>();
-         LineItem li1 = new LineItem(new Bottom("Chocolate",5), new Top("Blueberry",5), 2);
-         items.add(li1);
-         LineItem li2 = new LineItem(new Bottom("Vanilla",5),new Top("Strawberry",6),3);
-         items.add(li2);
-         
-         im.registerDetails(id, items);
+//         InvoiceMapper im = new InvoiceMapper();
+//         
+//         int id =1;
+//         
+//         List<LineItem> items = new ArrayList<>();
+//         LineItem li1 = new LineItem(new Bottom("Chocolate",5), new Top("Blueberry",5), 2);
+//         items.add(li1);
+//         LineItem li2 = new LineItem(new Bottom("Vanilla",5),new Top("Strawberry",6),3);
+//         items.add(li2);
+//         
+//         im.registerDetails(id, items);
          
         
                  
