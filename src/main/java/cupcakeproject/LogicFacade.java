@@ -27,7 +27,7 @@ public class LogicFacade {
         return user;
     }
 
-    public static User createUser(String name, String password, int balance, String email){// throws SQLException, ClassNotFoundException {
+    public static User createUser(String name, String password, int balance, String email) throws SQLException, ClassNotFoundException {
         return UserDBMapper.createUser(name, password, balance, email);
     }
 

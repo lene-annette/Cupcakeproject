@@ -51,7 +51,7 @@ public class UserServlet extends HttpServlet {
 
                 User user = LogicFacade.login(name, password);
 
-                if (user != null) {
+                if (user.getName() != null) {
                     session.setAttribute("activeUser", user);
                     String nextURL = "ShowProductsServlet";
                     request.getRequestDispatcher(nextURL).forward(request, response);

@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class UserDBMapper {
 
-    public static List<User> getAllUsers(){ //throws SQLException, ClassNotFoundException {
+    public static List<User> getAllUsers() { //throws SQLException, ClassNotFoundException {
         List<User> users = new ArrayList<>();
         try {
             String SQL = "SELECT * FROM users;";
@@ -76,7 +76,7 @@ public class UserDBMapper {
 
     }
 
-    public static User getUser(String name, String password){// throws SQLException, ClassNotFoundException {
+    public static User getUser(String name, String password) {// throws SQLException, ClassNotFoundException {
         Connection con = null;
         String SQL = "SELECT * FROM users WHERE u_name='" + name + "' AND psw='" + password + "';";
         ResultSet rs = null;
@@ -99,10 +99,10 @@ public class UserDBMapper {
 
     }
 
-    public static User createUser1(String name, String password, int balance, String email){// throws SQLException, ClassNotFoundException {
-            Connection con = null;
-            PreparedStatement ps = null;
-            String SQL = "INSERT INTO users VALUES('?','?','?','?');";
+    public static User createUser1(String name, String password, int balance, String email) {// throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        String SQL = "INSERT INTO users VALUES('?','?','?','?');";
         try {
             con = DBConnector.connection();
             ps = con.prepareStatement(SQL);
@@ -113,44 +113,40 @@ public class UserDBMapper {
             ps.setString(4, email);
 
             ps.executeUpdate(SQL);
-            
+
             ps.close();
             con.close();
         } catch (Exception ex) {
             Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return getUser(name, password);
 
     }
-    
-    public static User createUser(String name, String password, int balance, String email){
+
+    public static User createUser(String name, String password, int balance, String email) throws SQLException, ClassNotFoundException {
         Connection con = null;
-        String sql = "INSERT INTO users VALUES('"+ name +"','"+ password +"',"+ balance +",'"+ email +"');";
-        try{
-            con = DBConnector.connection();
-            con.createStatement().executeUpdate(sql);
-            
-            con.close();
-        } catch(Exception ex){
-           Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex); 
-        }
-        
-        return getUser(name,password);
+        String sql = "INSERT INTO users VALUES('" + name + "','" + password + "'," + balance + ",'" + email + "');";
+        con = DBConnector.connection();
+        con.createStatement().executeUpdate(sql);
+
+        con.close();
+
+        return getUser(name, password);
     }
-    
-    public static void withDrawBalance(User user, int spend){
+
+    public static void withDrawBalance(User user, int spend) {
         String name = user.getName();
         int balance = user.getBalance() - spend;
         Connection con = null;
-        String sql = "UPDATE users SET balance="+ balance +" WHERE u_name='"+ name +"';";
-        try{
-           con = DBConnector.connection();
-           con.createStatement().executeUpdate(sql);
-           
-           con.close();
-        }catch(Exception ex){
-            Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex); 
+        String sql = "UPDATE users SET balance=" + balance + " WHERE u_name='" + name + "';";
+        try {
+            con = DBConnector.connection();
+            con.createStatement().executeUpdate(sql);
+
+            con.close();
+        } catch (Exception ex) {
+            Logger.getLogger(UserDBMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
