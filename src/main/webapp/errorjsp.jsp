@@ -8,14 +8,37 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Error page</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom fonts for this template -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+        <!-- Custom styles for this template -->
+        <link href="css/business-casual.css" rel="stylesheet">
     </head>
     <body>
-            <div>an error ucurred please try again, this is the jsp<br>
-            <a href="index.html">home</a></div>
-        <hr>
-        <%=request.getAttribute("error")%>
-        
+        <div class="container">
+            <div class="bg-faded p-4 my-4">
+                <div class="card card-inverse">
+                    <img class="card-img img-fluid w-100" src="img/slide-1.jpg" alt="">
+                    <div class="card-img-overlay bg-overlay">
+                       
+                        <h3 class="card-title text-shadow text-white mb-0 text-center">An error occurred</h3>
+                        <br>
+                        <div style="text-align:center"><a class="btn btn-secondary" href="index.html" >Go to home</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

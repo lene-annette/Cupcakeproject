@@ -34,7 +34,7 @@
                     <div class="card-img-overlay bg-overlay">
                         <h3 class="card-title text-shadow text-white mb-0 text-center">Your order has been recieved!</h3>
                         <br>
-                        <h3 class="card-title text-shadow text-white mb-0 text-center">We will be sending your cupcakes within 1 - 2 workdays.</h3>
+                        <h3 class="card-title text-shadow text-white mb-0 text-center">Your cupcakes are now ready at pickup.</h3>
                         <br>
                         <div style="text-align:center"><a class="btn btn-secondary" href="index.html" >Go to home</a></div>
                     </div>
